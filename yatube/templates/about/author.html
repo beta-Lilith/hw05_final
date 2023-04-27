@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+<style>
+  
+  li {
+    color: #ed0b0e;
+   }
+  .black {
+   color: #212529;
+  }
+  .semibold {
+    font-weight: 600;
+   }
+ </style>
+<h1>Привет, я автор</h1>
+<div class="row">
+  
+  <article class="col-12 col-md-8">
+    <p>
+      Тут я размещу информацию о себе, используя свои умения верстать.
+      Картинки, блоки, элементы бустрап. А может быть, просто напишу несколько абзацев текста (upd - написала). 
+    </p>
+    <h5> Обо мне </h5>
+    <p>
+      Копирайтер из меня так себе, это для начала. 
+      А если вкратце: 
+      <ul>
+        <li><span class="black">Получить высшее образование (геолог) - </span><span class="semibold">done</span></li>
+        <li><span class="black">Поработать по специальности (на северах, на буровых, по хардкору) - </span><span class="semibold">done</span></li>
+        <li><span class="black">Уехать заграницу (получить лицензию пилота) - </span><span class="semibold">done</span></li>
+        <li><span class="black">Уехать заграницу (поработать по специальности пилотом, летным инструктором) - </span><span class="semibold">done</span></li>
+        <li><span class="black">Вернуться домой из-за внешних обстоятельств - </span><span class="semibold">done</span></li>
+        <li><span class="black">Понять, что всё тлен (осознать, что со всеми своими квалификациями ты можешь работать только в колл-центре) - </span><span class="semibold">done</span></li>
+        <li><span class="black">Долго метаться и думать, что же делать - </span><span class="semibold">done</span></li>
+        <li><span class="black">Купить курс Я.Практикума (начать учиться разработке) - </span><span class="semibold">pending...</span></li>
+        <li><span class="black">Получить 3ю специальность - </span><span class="semibold">???
+        <li><span class="black">Работать по специальности - </span><span class="semibold">???
+      </ul>
+      Анекдот про ворону: <a href="https://pikabu.ru/story/anekdot_pro_voronu_1969245" target="blank">тык</a>
+    </p>
+  </article>
+
+  <aside class="col-12 col-md-4">
+    <img src="{% static 'img/grumpy_cat.jpg' %}" class="rounded img-fluid" alt="">
+  </aside>
+
+</div>
+{% endblock %}

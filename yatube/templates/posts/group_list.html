@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Группы Yatube {% endblock %}
+
+{% block content %}
+
+  {% for post in page_obj %}
+    
+    {% include 'posts/post.html' %}
+    <a href="{% url 'posts:post_detail' post.id %}">подробная информация </a>
+    {% if not forloop.last %}<hr>{% endif %}
+  {% endfor %}
+  
+  {% include 'includes/paginator.html' %}
+  
+{% endblock %}

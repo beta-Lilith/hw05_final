@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Упс... А это 403</h1>
+  <p>Вам лучше не знать, что такое токены</p>
+  <a href="{% url 'posts:index' %}">Идите на главную</a>
+{% endblock %}
