@@ -33,8 +33,8 @@ urlpatterns = [
 ]
 
 handler404 = 'core.views.page_not_found'
-# pytest просил зачем-то вот это... handler403 = 'core.csrf_failure'
-# всё в settings настроено
+# pytest просил зачем-то вот это... всё в settings настроено же по теории...
+handler403 = 'core.csrf_failure'
 
 if settings.DEBUG:
     urlpatterns += static(
