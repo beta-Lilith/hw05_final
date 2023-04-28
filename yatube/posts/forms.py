@@ -3,11 +3,11 @@ from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
+    """Форма создания/редактирования поста."""
 
     class Meta:
-        # На основе какой модели создаётся класс формы
+
         model = Post
-        # Укажем, какие поля будут в форме
         fields = ('text', 'group', 'image')
 
     def clean_text(self):
@@ -19,6 +19,7 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """Форма комментариев."""
 
     class Meta:
 

@@ -24,7 +24,7 @@ SECRET_KEY = 'y#+#ot(2$07bag5os(0_)7r)+(!x8te6rre*&$4(!vw&9t6ohz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# 6Sprint
+
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
 MEDIA_URL = '/media/'
@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sorl.thumbnail',  # 6Sprint
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -151,7 +151,6 @@ LOGIN_REDIRECT_URL = 'posts:index'
 # LOGOUT_REDIRECT_URL = 'posts:index'
 
 # Эмулятор почты
-#  подключаем движок filebased.EmailBackend
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-# указываем директорию, в которую будут складываться файлы писем
+# Директорию, где хранятся письма
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')

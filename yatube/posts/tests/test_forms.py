@@ -43,11 +43,7 @@ class PostFormTests(TestCase):
     @classmethod
     def tearDownClass(cls):
         super().tearDownClass()
-        # Модуль shutil - библиотека Python с удобными инструментами
-        # для управления файлами и директориями:
-        # создание, удаление, копирование, перемещение,
-        # изменение папок и файлов
-        # Метод shutil.rmtree удаляет директорию и всё её содержимое
+
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
 
     def setUp(self):
@@ -227,9 +223,10 @@ class CommentFormTests(TestCase):
         super().setUpClass()
 
         cls.user = User.objects.create_user(username='Василий троль')
+        cls.author = User.objects.create_user(username='Толстой')
         cls.post = Post.objects.create(
             text='Много текста тестового поста',
-            author=cls.user,
+            author=cls.author,
         )
 
     def setUp(self):
@@ -240,7 +237,7 @@ class CommentFormTests(TestCase):
     def test_comment_form(self):
         """После успешной отправки комментарий появляется на странице поста."""
 
-        comments_count = Comment.objects.count()
+        comments_count = CommentFormTests.post.comments.count()
         form_data = {
             'text': 'Гневный комментарий',
         }
@@ -251,10 +248,11 @@ class CommentFormTests(TestCase):
         )
         self.assertRedirects(response, reverse(
             'posts:post_detail', args=[CommentFormTests.post.id]))
-        self.assertEqual(Comment.objects.count(), comments_count + 1)
+        self.assertEqual(
+            CommentFormTests.post.comments.count(), comments_count + 1)
         self.assertTrue(
             Comment.objects.filter(
                 text=form_data['text'],
-                author=CommentFormTests.post.author,
+                author=CommentFormTests.user,
             ).exists()
         )

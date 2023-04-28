@@ -26,10 +26,10 @@ class PostModelTest(TestCase):
 
         post = PostModelTest.post
         field_verboses = {
-            'text': 'Текс поста',
-            'pub_date': 'Дата создания',
-            'author': 'Автор',
-            'group': 'Группа',
+            'text': 'текс поста',
+            'pub_date': 'дата создания',
+            'author': 'автор',
+            'group': 'группа',
         }
         for field, expected_value in field_verboses.items():
             with self.subTest(field=field):
@@ -75,9 +75,9 @@ class GroupModelTest(TestCase):
 
         group = GroupModelTest.group
         field_verboses = {
-            'title': 'Имя группы',
+            'title': 'имя группы',
             'slug': 'URL',
-            'description': 'Описание группы',
+            'description': 'описание группы',
         }
         for field, expected_value in field_verboses.items():
             with self.subTest(field=field):

@@ -9,21 +9,19 @@ from django.shortcuts import redirect
 POSTS_PER_PAGE = 10
 
 
-# Паджинатор
 def paginator_3000(post_list, request):
+    """Паджинатор."""
 
     paginator = Paginator(post_list, POSTS_PER_PAGE)
-    # Из URL извлекаем номер запрошенной страницы - это значение параметра page
     page_number = request.GET.get('page')
-    # Получаем набор записей для страницы с запрошенным номером
     page_obj = paginator.get_page(page_number)
 
     return page_obj
 
 
-# Главная страница
 # @cache_page(20, key_prefix="index_page")
 def index(request):
+    """Главная страница."""
 
     template = 'posts/index.html'
     headline = 'Последние обновления на сайте'
@@ -37,13 +35,9 @@ def index(request):
     return render(request, template, context)
 
 
-# Страница постов, отфильтрованных по группам
 def group_posts(request, slug):
+    """Страница постов, отфильтрованных по группам."""
 
-    # Функция get_object_or_404 получает по заданным критериям объект
-    # из базы данных или возвращает сообщение об ошибке, если объект не найден.
-    # В нашем случае в переменную group будут переданы объекты модели Group,
-    # поле slug у которых соответствует значению slug в запросе
     group = get_object_or_404(Group, slug=slug)
     template = 'posts/group_list.html'
     headline = 'Записи сообщества: '
@@ -58,8 +52,8 @@ def group_posts(request, slug):
     return render(request, template, context)
 
 
-# Страница пользователя/автора
 def profile(request, username):
+    """Страница пользователя/автора."""
 
     username = get_object_or_404(User, username=username)
     template = 'posts/profile.html'
@@ -79,8 +73,8 @@ def profile(request, username):
     return render(request, template, context)
 
 
-# Подробная инфа о посте
 def post_detail(request, post_id):
+    """Подробная информация о посте."""
 
     post = get_object_or_404(Post, id=post_id)
     template = 'posts/post_detail.html'
@@ -101,9 +95,9 @@ def post_detail(request, post_id):
     return render(request, template, context)
 
 
-# Страница создания нового поста
 @login_required
 def post_create(request):
+    """Страница создания нового поста."""
 
     template = 'posts/post_create.html'
 
@@ -124,9 +118,9 @@ def post_create(request):
     return render(request, template, context)
 
 
-# Страница редактирования поста (только автор)
 @login_required
 def post_edit(request, post_id):
+    """Страница редактирования поста (только автор)."""
 
     post = get_object_or_404(Post, id=post_id)
     template = 'posts/post_create.html'
@@ -135,7 +129,6 @@ def post_edit(request, post_id):
         return redirect('posts:post_detail', post_id)
     form = PostForm(
         request.POST or None,
-        # 6Sprint
         files=request.FILES or None,
         instance=post
     )
@@ -153,9 +146,9 @@ def post_edit(request, post_id):
     return render(request, template, context)
 
 
-# Страница добавления комментария к посту на странице поста
 @login_required
 def add_comment(request, post_id):
+    """Страница добавления комментария к посту на странице поста."""
 
     post = get_object_or_404(Post, id=post_id)
 
@@ -169,9 +162,9 @@ def add_comment(request, post_id):
     return redirect('posts:post_detail', post_id=post_id)
 
 
-# Страница постов авторов, на которых подписан текущий пользователь.
 @login_required
 def follow_index(request):
+    """Страница постов авторов, на которых подписан текущий пользователь."""
 
     post_list = Post.objects.filter(author__following__user=request.user)
     template = 'posts/follow.html'
@@ -184,9 +177,9 @@ def follow_index(request):
     return render(request, template, context)
 
 
-# Подписаться на автора
 @login_required
 def profile_follow(request, username):
+    """Подписаться на автора."""
 
     author = get_object_or_404(User, username=username)
 
@@ -195,9 +188,9 @@ def profile_follow(request, username):
     return redirect('posts:profile', author)
 
 
-# Дизлайк, отписка
 @login_required
 def profile_unfollow(request, username):
+    """Дизлайк, отписка."""
 
     author = get_object_or_404(User, username=username)
 

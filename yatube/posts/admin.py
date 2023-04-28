@@ -3,7 +3,8 @@ from .models import Post, Group, Comment, Follow
 
 
 class PostAdmin(admin.ModelAdmin):
-    # Перечисляем поля, которые должны отображаться в админке
+    """Задаем поля в админ-зоне приложения Post."""
+
     list_display = (
         'pk',
         'text',
@@ -12,11 +13,8 @@ class PostAdmin(admin.ModelAdmin):
         'group',
     )
     list_editable = ('group',)
-    # Добавляем интерфейс для поиска по тексту постов
     search_fields = ('text',)
-    # Добавляем возможность фильтрации по дате
     list_filter = ('pub_date',)
-    # Это свойство сработает для всех колонок: где пусто — там будет эта строка
     empty_value_display = '-пусто-'
 
 

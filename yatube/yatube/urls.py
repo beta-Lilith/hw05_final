@@ -15,26 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# 6Sprint
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 urlpatterns = [
-    # импорт правил из приложения posts, добавили пространство имен
+
     path('', include('posts.urls', namespace='posts')),
     path('admin/', admin.site.urls),
-    # Django проверяет url-адреса сверху вниз,
-    # Django сначала проверял адреса в приложении users
     path('auth/', include('users.urls', namespace='users')),
-    # и после в модуле django.contrib.auth (папка venv)
     path('auth/', include('django.contrib.auth.urls')),
     path('about/', include('about.urls', namespace='about')),
 ]
 
 handler404 = 'core.views.page_not_found'
 # pytest просил зачем-то вот это... всё в settings настроено же по теории...
-handler403 = 'core.csrf_failure'
+handler403 = 'core.views.csrf_failure'
 
 if settings.DEBUG:
     urlpatterns += static(
